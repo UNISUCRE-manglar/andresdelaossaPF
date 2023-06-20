@@ -1,0 +1,10 @@
+git init
+git add .
+git commit -m "Texto"
+git config --global user.email <email de git>
+git config --global user.name <nombre de usuario en git>
+git branch -M main
+git remote add origin <link repositorio git>
+git push -u origin main
+or 
+git push origin master

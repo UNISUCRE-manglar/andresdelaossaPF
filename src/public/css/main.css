@@ -1,0 +1,11 @@
+  body {
+  background: #770f20;  
+  background: -webkit-linear-gradient(to right, #61e06b, #273e61);
+  /*colores fondo pantalla principal*/ 
+  background: linear-gradient(to right, #cf76e6, #ebd059); 
+}  
+.logo {
+  width: 100%;
+} 
+
+
