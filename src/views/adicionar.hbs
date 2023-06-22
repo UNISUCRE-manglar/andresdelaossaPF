@@ -25,83 +25,121 @@
             </h1>
             Seleccione el numero de electrodomesticos con el que cuenta en su hogar<br>
 
-            <div class="form-group">
-                <br>Neveras
-                <select id="neveras" name="Neveras">
-                    <option value="0">0</option>
-                    {{!-- <option value="2.96">1</option> --}}
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+            <div id="lienzo"></div>
+            <p id="total"></p>
 
-                <br>Numero de horas de uso diario
-                <select id="horas" name="Hs1">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                </select>
+            <script>
+                var electrodomesticos = ["neveras", "ventiladores", "aires acondicionados", 
+                "bombillos", "planchas", "tostadoras", "lavadoras",
+                "horno microondas"]
+                var datos = {
+                    "neverasKWh" : 1.36,
+                    "ventiladoresKWh" : 0.13,
+                    "aires acondicionadosKWh": 2.12,
+                    "bombillosKWh" : 0.015 ,
+                    "planchasKWh" : 0.74 ,
+                    "tostadorasKWh" : 1.02 ,
+                    "lavadorasKWh" : 1.2 ,
+                    "horno microondasKWh" : 1.4 ,
+                }
+            </script>
 
-                <p id="result"></p>
-
-                <script>
-                    const neverasSelect = document.getElementById("neveras");
-                    const horasSelect = document.getElementById("horas");
-
-                    neverasSelect.addEventListener("change", calcularConsumoNevera);
-                    horasSelect.addEventListener("change", calcularConsumoNevera);
-                    var datos = {
-                        neveraKWh : 2.96,
-                        nevera : 0
+            <script>
+                function calcularTotalConsumo() {
+                    let total = 0
+                    for (i = 0; i < electrodomesticos.length; i++) {
+                        total += parseFloat(datos[electrodomesticos[i]]) 
                     }
+                    return total.toFixed(2)
+                }
+
+                function creareSelectElectrodomestico(nombre) {
+                    const selectElectrodomestico = document.createElement('select')
+                    selectElectrodomestico.id = nombre
+                    selectElectrodomestico.name = nombre
+
+                    for(let i = 0; i <= 10; i++) {
+                        const opt = document.createElement('option')
+                        opt.value= i
+                        opt.innerText = i
+                        selectElectrodomestico.appendChild(opt)
+                    }
+
+                    return selectElectrodomestico;
+                }
+                
+                function crearSelectHoras(horasId) {
+                    const select = document.createElement('select')
+                    select.id = horasId
+                    select.name = horasId
+
+                    for( let i = 0; i <= 24; i++ ) {
+                        const opt = document.createElement('option')
+                        opt.value = i
+                        opt.innerText = i
+                        select.appendChild(opt)
+                    }
+
+                    return select
+                }
+            
+                function calcularConsumoElectrodomestico(nombre) {
+                    const electrodomesticoSelect = document.getElementById(nombre);
+                    const horasSelect = document.getElementById(nombre + "-horas");
+                    const resultElement = document.getElementById(nombre + "-resultado");
+
+                    electrodomesticoSelect.addEventListener("change", calcularConsumo);
+                    horasSelect.addEventListener("change", calcularConsumo);
                     
-                    function calcularConsumoNevera(){
-                        calcularConsumo("neveras", "horas", "result", "nevera" )  
-                    }
-
-                    function calcularConsumo(electrodomesticoId, horasId, resultId, nombreElectrodomestico ) {
-                        const electrodomesticoSelect = document.getElementById(electrodomesticoId);
-                        const horasSelect = document.getElementById(horasId);
-                        const resultElement = document.getElementById(resultId);
-                        
+                    function calcularConsumo() {
                         const electrodomesticoValue = parseFloat(electrodomesticoSelect.value);
                         const horasValue = parseFloat(horasSelect.value);
-                        consumoElectrodomesticos = (electrodomesticoValue * datos[nombreElectrodomestico + "KWh"]  * horasValue).toFixed(2)
-                        datos[nombreElectrodomestico] = consumoElectrodomesticos
+                        consumoElectrodomesticos = (electrodomesticoValue * datos[nombre + "KWh"]  * horasValue).toFixed(2)
+                        datos[nombre] = consumoElectrodomesticos
                         resultElement.textContent = `Consumo diario: ${consumoElectrodomesticos} KW/h`;
-                        
+                        document.getElementById('total').innerText = "Consumo diario total: " + calcularTotalConsumo()
                     }
-                </script>
-            </div>
+                }
+            
+                function crearGrupoElectrodomestico(nombre) {
+                    const formulario = document.createElement('div')
+                    formulario.classList.add("form-group")
+                    formulario.id = nombre + "-group" // nevera-group, abanico-group
+
+                    const d1 = document.createElement('div')
+                    d1.appendChild(document.createTextNode(nombre))
+                    d1.appendChild(creareSelectElectrodomestico(nombre)) // nevera, abanico
+
+                    const d2 = document.createElement('div')
+                    d2.appendChild(document.createTextNode('Numero de horas de uso diario'))
+                    d2.appendChild(crearSelectHoras(nombre + "-horas")) // nevera-horas, abanico-horas
+                    
+                    formulario.appendChild(d1)
+                    formulario.appendChild(d2)
+
+                    const p = document.createElement('p')
+                    p.id = nombre + "-resultado" // nevera-resultado, abanico-resultado
+                    formulario.appendChild(p)
+                    formulario.style.border = "1px dashed"
+                    formulario.style.padding = "8px"
+
+                    return formulario
+                }
+            </script>
+
+            <script>
+                const lienzo = document.getElementById("lienzo")
+                
+                for (i = 0; i < electrodomesticos.length; i++) {
+                    datos[electrodomesticos[i]] = 0
+                }
+                
+                for (let i = 0; i < electrodomesticos.length; i++) {
+                    const nombre = electrodomesticos[i]
+                    lienzo.appendChild(crearGrupoElectrodomestico(nombre))
+                    calcularConsumoElectrodomestico(nombre)
+                }
+            </script>
 
             <button class="btn btn-primary btn-block">
                 Enviar
