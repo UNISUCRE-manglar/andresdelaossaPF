@@ -1,0 +1,399 @@
+<!--formulario de ingreso del sevidor-->
+
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <div class="card mt-4 text-center">
+      <div class="card-header">
+        <h1 class="h4">
+            Introduzca la información necesaria para las respectivas recomendaciones
+        </h1>
+
+        <form action="/adicionar" method="POST"></form>
+            
+            <div class="form-group">
+                Seleccione su lugar de residencia 
+                <select name="lugar">
+                    <option value="4.75">Sincelejo</option>
+                    <option value="4.25">Monteria</option>
+                    <option value="5">Barranquilla</option>
+                    <option value="5.25">Cartagena</option>
+                </select>
+            </div>
+
+            <h1 class="h5">
+            Ahora, información del hogar
+            </h1>
+            Seleccione el numero de electrodomesticos con el que cuenta en su hogar<br>
+
+            <div class="form-group">
+                <br>Neveras
+                <select id="neveras" name="Neveras">
+                    <option value="0">0</option>
+                    <option value="2.96">1</option>
+                    <option value="5.91">2</option>
+                    <option value="8.87">3</option>
+                    <option value="11.84">4</option>
+                    <option value="14.8">5</option>
+                    <option value="17.8">6</option>
+                    <option value="20.7">7</option>
+                    <option value="23.7">8</option>
+                    <option value="26.6">9</option>
+                    <option value="29.6">10</option>
+                </select>
+
+                <br>Numero de horas de uso diario
+                <select id="horas" name="Hs1">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                </select>
+
+                <p id="result"></p>
+
+                <script>
+                    const neverasSelect = document.getElementById("neveras");
+                    const horasSelect = document.getElementById("horas");
+                    const resultElement = document.getElementById("result");
+
+                    neverasSelect.addEventListener("change", multiplyValues);
+                    horasSelect.addEventListener("change", multiplyValues);
+
+                    function multiplyValues() {
+                        const neverasValue = parseFloat(neverasSelect.value);
+                        const horasValue = parseFloat(horasSelect.value);
+                        const result = (neverasValue * horasValue).toFixed(2);
+                        //resultElement.textContent = `Consumo diario: ${result} KW/h`;
+                        const t1 = document.createTextNode(' cosumo diario: ')
+                        const t2 = document.createTextNode(' KW/h')
+                        const n = document.createElement("span")
+                        n.classList.add('consumo-total');
+                        n.appendChild(document.createTextNode(result))
+                        resultElement.appendChild(t1)
+                        resultElement.appendChild(n)
+                        resultElement.appendChild(t2)
+                    }
+                </script>
+            </div>
+
+            <div class="form-group">
+                Abanicos
+                <select id="avanicos" name="Abanicos">
+                    <option value="0">0</option>
+                    <option value="0.33">1</option>
+                    <option value="0.65">2</option>
+                    <option value="0.98">3</option>
+                    <option value="1.3">4</option>
+                    <option value="1.6">5</option>
+                    <option value="1.96">6</option>
+                    <option value="2.28">7</option>
+                    <option value="2.6">8</option>
+                    <option value="2.94">9</option>
+                    <option value="3.26">10</option>
+                </select>
+
+                <br>Horas de uso diario
+                <select id="horas1" name="Hs2">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                </select>
+
+                <p id="result1"></p>
+
+                <script>
+                    const avanicosSelect = document.getElementById("avanicos");
+                    const horas1Select = document.getElementById("horas1");
+                    const resultElement1 = document.getElementById("result1");
+
+                    avanicosSelect.addEventListener("change", multiplyValues1);
+                    horas1Select.addEventListener("change", multiplyValues1);
+
+                    function multiplyValues1() {
+                        const avanicosValue = parseFloat(avanicosSelect.value);
+                        const horas1Value = parseFloat(horas1Select.value);
+                        const result1 = (avanicosValue * horas1Value).toFixed(2);
+                        //resultElement1.textContent = `Consumo diario: ${result1} KW/h`;
+                        const t1 = document.createTextNode(' cosumo diario: ')
+                        const t2 = document.createTextNode(' KW/h')
+                        const n = document.createElement("span")
+                        n.classList.add('consumo-total');
+                        n.appendChild(document.createTextNode(result2))
+                        resultElement.appendChild(t1)
+                        resultElement.appendChild(n)
+                        resultElement.appendChild(t2)
+                    }
+                </script>
+            </div>
+            
+            <div class="form-group">
+                Aires acondicionados
+                <select id="aires" name="Aires">
+                    <option value="0">0</option>
+                    <option value="4.1">1</option>
+                    <option value="8.2">2</option>
+                    <option value="12.3">3</option>
+                    <option value="16.4">4</option>
+                    <option value="20.5">5</option>
+                    <option value="24.6">6</option>
+                    <option value="28.7">7</option>
+                    <option value="32.8">8</option>
+                    <option value="36.9">9</option>
+                    <option value="41">10</option>
+                </select>
+
+                <br>Horas de uso diario
+                <select id="horas2" name="Hs3">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                </select>
+
+                <p id="result2"></p>
+
+                <script>
+                    const airesSelect = document.getElementById("aires");
+                    const horas2Select = document.getElementById("horas2");
+                    const resultElement2 = document.getElementById("result2");
+
+                    airesSelect.addEventListener("change", multiplyValues2);
+                    horas2Select.addEventListener("change", multiplyValues2);
+
+                    function multiplyValues2() {
+                        const airesValue = parseFloat(airesSelect.value);
+                        const horas2Value = parseFloat(horas2Select.value);
+                        const result2 = (airesValue * horas2Value).toFixed(2);
+                        //resultElement2.textContent = `Consumo diario: ${result2} KW/h`;
+                        const t1 = document.createTextNode(' cosumo diario: ')
+                        const t2 = document.createTextNode(' KW/h')
+                        const n = document.createElement("span")
+                        n.classList.add('consumo-total');
+                        n.appendChild(document.createTextNode(result4))
+                        resultElement4.appendChild(t1)
+                        resultElement4.appendChild(n)
+                        resultElement4.appendChild(t2)
+                    }
+                </script>
+            </div>
+            
+            <div class="form-group">
+                Bombillos
+                <select id="bombillos" name="Bombillos">
+                    <option value="0">0</option>
+                    <option value="0.27">1</option>
+                    <option value="0.55">2</option>
+                    <option value="0.82">3</option>
+                    <option value="1.1">4</option>
+                    <option value="1.36">5</option>
+                    <option value="1.64">6</option>
+                    <option value="1.9">7</option>
+                    <option value="2.2">8</option>
+                    <option value="2.46">9</option>
+                    <option value="2.7">10</option>
+                </select>
+
+                <br>Horas de uso diario
+                <select id="horas3" name="Hs4">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                </select>
+
+                <p id="result3"></p>
+
+                <script>
+                    const bombillosSelect = document.getElementById("bombillos");
+                    const horas3Select = document.getElementById("horas3");
+                    const resultElement3 = document.getElementById("result3");
+
+                    bombillosSelect.addEventListener("change", multiplyValues3);
+                    horas3Select.addEventListener("change", multiplyValues3);
+
+                    function multiplyValues3() {
+                        const bombillosValue = parseFloat(bombillosSelect.value);
+                        const horas3Value = parseFloat(horas3Select.value);
+                        const result3 = (bombillosValue * horas3Value).toFixed(2);
+                        //resultElement3.textContent = `Consumo diario: ${result3} KW/h`;
+                        const t1 = document.createTextNode(' cosumo diario: ')
+                        const t2 = document.createTextNode(' KW/h')
+                        const n = document.createElement("span")
+                        n.classList.add('consumo-total');
+                        n.appendChild(document.createTextNode(result4))
+                        resultElement4.appendChild(t1)
+                        resultElement4.appendChild(n)
+                        resultElement4.appendChild(t2)
+                    }
+                </script>
+            </div>
+        
+            <div class="form-group">
+                Televisores
+                <select id="televisores" name="Televisores">
+                    <option value="0">0</option>
+                    <option value="1.7">1</option>
+                    <option value="3.46">2</option>
+                    <option value="5.2">3</option>
+                    <option value="6.9">4</option>
+                    <option value="8.7">5</option>
+                    <option value="10.4">6</option>
+                    <option value="12.13">7</option>
+                    <option value="13.9">8</option>
+                    <option value="15.6">9</option>
+                    <option value="17.3">10</option>
+                </select>
+
+                <br>Horas de uso diario
+                <select id="horas4" name="Hs5">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                </select>
+
+                <p id="result4"></p>
+
+                <script>
+                    const televisoresSelect = document.getElementById("televisores");
+                    const horas4Select = document.getElementById("horas4");
+                    const resultElement4 = document.getElementById("result4");
+
+                    televisoresSelect.addEventListener("change", multiplyValues4);
+                    horas4Select.addEventListener("change", multiplyValues4);
+
+                    function multiplyValues4() {
+                        const televisoresValue = parseFloat(televisoresSelect.value);
+                        const horas4Value = parseFloat(horas4Select.value);
+                        const result4 = (televisoresValue * horas4Value).toFixed(2);
+                        //resultElement4.textContent = `Consumo diario: ${result4} KW/h`;
+                        const t1 = document.createTextNode(' cosumo diario: ')
+                        const t2 = document.createTextNode(' KW/h')
+                        const n = document.createElement("span")
+                        n.classList.add('consumo-total');
+                        n.appendChild(document.createTextNode(result4))
+                        resultElement4.appendChild(t1)
+                        resultElement4.appendChild(n)
+                        resultElement4.appendChild(t2)
+                    }
+                </script>
+
+            
+            </div>
+
+            
+
+            <button class="btn btn-primary btn-block">
+                Enviar
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
